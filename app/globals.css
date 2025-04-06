@@ -133,3 +133,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.chat-input {
+  font-size: 16px; /* Prevent zooming on iOS */
+}

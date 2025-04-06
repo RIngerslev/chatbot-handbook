@@ -38,8 +38,8 @@ export default function Home() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
+    if (e.key === "Enter" || e.key === "Return") {
+      e.preventDefault(); // Prevent adding a new line
       if (inputValue.trim()) {
         handleSendMessage(inputValue); // Send the message
         setInputValue(""); // Clear the input field
@@ -79,7 +79,7 @@ export default function Home() {
             value={inputValue} // Bind the input value
             onChange={(e) => setInputValue(e.target.value)} // Update the input value
             onKeyDown={handleKeyDown} // Handle Enter key press
-            className="min-h-12 resize-none rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+            className="min-h-12 resize-none rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0 text-base"
           />
         </div>
       </div>
