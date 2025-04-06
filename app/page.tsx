@@ -2,10 +2,7 @@
 import { ChatBubble, ChatBubbleAvatar, ChatBubbleMessage } from "@/src/components/ui/chat/chat-bubble";
 import { ChatInput } from "@/src/components/ui/chat/chat-input";
 import { ChatMessageList } from "@/src/components/ui/chat/chat-message-list";
-import { callAi } from "./ai/ai";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { CornerDownLeft } from "lucide-react";
 
 export default function Home() {
   const [messages, setMessages] = useState<{ text: string; variant: 'sent' | 'received' }[]>([]);
@@ -15,22 +12,27 @@ export default function Home() {
   const handleSendMessage = async (message: string) => {
     // Add the user's message to the chat
     setMessages((prev) => [...prev, { text: message, variant: 'sent' }]);
-
+  
     // Show loading indicator
     setIsLoading(true);
-
-    // Call AI and add the response to the chat
+  
+    // Call the server-side API
     try {
-      const response = await callAi({ message });
+      const response = await fetch('/api/callAi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message }),
+      });
+      const data = await response.json();
       setMessages((prev) => [
         ...prev,
-        { text: response ?? "Error: No response from AI", variant: 'received' }, // Fallback for undefined
+        { text: data.response ?? "Error: No response from AI", variant: 'received' },
       ]);
     } catch (error) {
       console.error("Error calling AI:", error);
       setMessages((prev) => [
         ...prev,
-        { text: "Error: Unable to get a response from AI", variant: 'received' }, // Error message
+        { text: "Error: Unable to get a response from AI", variant: 'received' },
       ]);
     } finally {
       setIsLoading(false);
