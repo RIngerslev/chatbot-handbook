@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import MessageLoading from "./message-loading";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../../components/ui/button";
 
 // ChatBubble
 const chatBubbleVariant = cva(
@@ -140,29 +140,29 @@ const ChatBubbleTimestamp: React.FC<ChatBubbleTimestampProps> = ({
   </div>
 );
 
-// ChatBubbleAction
-type ChatBubbleActionProps = ButtonProps & {
-  icon: React.ReactNode;
-};
+// // ChatBubbleAction
+// type ChatBubbleActionProps = ButtonProps & {
+//   icon: React.ReactNode;
+// };
 
-const ChatBubbleAction: React.FC<ChatBubbleActionProps> = ({
-  icon,
-  onClick,
-  className,
-  variant = "ghost",
-  size = "icon",
-  ...props
-}) => (
-  <Button
-    variant={variant}
-    size={size}
-    className={className}
-    onClick={onClick}
-    {...props}
-  >
-    {icon}
-  </Button>
-);
+// const ChatBubbleAction: React.FC<ChatBubbleActionProps> = ({
+//   icon,
+//   onClick,
+//   className,
+//   variant = "ghost",
+//   size = "icon",
+//   ...props
+// }) => (
+//   <Button
+//     variant={variant}
+//     size={size}
+//     className={className}
+//     onClick={onClick}
+//     {...props}
+//   >
+//     {icon}
+//   </Button>
+// );
 
 interface ChatBubbleActionWrapperProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -197,6 +197,6 @@ export {
   ChatBubbleTimestamp,
   chatBubbleVariant,
   chatBubbleMessageVariants,
-  ChatBubbleAction,
+  // ChatBubbleAction,
   ChatBubbleActionWrapper,
 };
